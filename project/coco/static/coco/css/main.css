@@ -1,0 +1,38 @@
+body {
+    background-color: #fbfcfb;
+}
+
+#hero .hero-bg {
+    height: calc(100vh - 60px);
+    width: 100%;
+    object-fit: cover;
+}
+
+.bg-body-tertiary {
+  background-color: #fbfcfb !important;
+}
+
+.post-title {
+    margin: 2rem 2rem;
+}
+
+.img-posts-top{
+    margin: 2rem 2rem;
+    width: 30%;
+}
+
+.p-content {
+    margin: 2rem 2rem;
+    width: 60%;
+}
+.post-published {
+    margin: 2rem 2rem;
+}
+
+.section-post .img-posts-top,
+.section-post p
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

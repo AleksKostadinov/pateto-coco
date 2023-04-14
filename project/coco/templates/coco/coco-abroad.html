@@ -1,0 +1,18 @@
+{% extends 'coco/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Abroad</h1>
+    {% for post in posts %}
+        {% if post.destination == 1 %}
+            <h2 class="post-title">{{ post.title }}</h2>
+            <br>
+            <img src="{{ post.image.url }}" alt="" class="img-posts-top">
+            <br>
+            <p class="p-content">{{ post.content }}</p>
+            <br>
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}

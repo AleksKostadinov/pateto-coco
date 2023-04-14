@@ -1,0 +1,25 @@
+{% extends 'coco/base.html' %}
+{% load static %}
+{% block content %}
+
+<section id="hero">
+    <img src="{% static '/coco/images/hero-bg.png' %}" alt="" class="hero-bg">
+</section>
+
+<section class="last-dest">
+    {% for post in posts %}
+        <h2 class="post-title">{{ post.title }}</h2>
+
+        <br>
+        <img src="{{ post.image.url }}" alt="" class="img-posts-top">
+        <br>
+        <p class="p-content">{{ post.content }}</p>
+        <h6 class="post-published">{{ post.published_on }}</h6>
+
+    {% endfor %}
+</section>
+
+
+
+
+{% endblock %}
