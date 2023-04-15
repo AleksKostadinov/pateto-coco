@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Bulgaria</h1>
     {% for post in posts %}
-        {% if post.destination == 0 %}
+        {% if not post.destination and post.status %}
             <h2 class="post-title">{{ post.title }}</h2>
             <br>
             <img src="{{ post.image.url}}" alt="" class="img-posts-top">

@@ -4,11 +4,12 @@
 {% block content %}
     <h1>Posts</h1>
     {% for post in posts %}
+        {% if post.status %}
         <h2 class="post-title">{{ post.title }}</h2>
         <section class="section-post">
             <img src="{{ post.image.url }}" alt="" class="img-posts-top">
             <p class="p-content">{{ post.content }}</p>
         </section>
+        {% endif %}
     {% endfor %}
-
 {% endblock %}

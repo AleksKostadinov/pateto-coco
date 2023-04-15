@@ -1,11 +1,15 @@
 from django.shortcuts import render
-
 from .models import Post
 
 
+def get_recent_posts():
+    return Post.objects.filter(status=1)[:4]
+
+
 def home(request):
+    last_posts = get_recent_posts()
     posts = Post.objects.all()
-    return render(request, 'coco/home.html', {'posts': posts})
+    return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts})
 
 
 def blog(request):

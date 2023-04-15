@@ -3,13 +3,13 @@ from .models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'author', 'published_on')
-    list_filter = ('status', 'published_on', 'author')
+    list_display = ('title', 'status', 'author', 'created_at', 'favourite', 'destination')
+    list_filter = ('status', 'created_at', 'author')
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
-    # date_hierarchy = 'published_on'
-    ordering = ['status', '-published_on']
+    # date_hierarchy = 'created_at'
+    ordering = ['status', '-created_at']
 
 
 admin.site.register(Post, PostAdmin)

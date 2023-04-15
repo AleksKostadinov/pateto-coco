@@ -124,3 +124,23 @@ h1 {
 #search-placeholder {
     margin-left: auto;
 }
+
+/*.col-lg-6 {*/
+/*    flex: 0 0 auto;*/
+/*    width: 50%;*/
+/*  }*/
+
+
+
+.fixed-height-img {
+        height: 350px; /* change this value to adjust the height of the images */
+        object-fit: cover;
+        object-position: center;
+    }
+
+
+.card-body .card-text {
+    max-height: 72px;
+    overflow: hidden;
+}
+
