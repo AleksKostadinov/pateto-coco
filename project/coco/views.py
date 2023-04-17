@@ -17,6 +17,15 @@ def blog(request):
     return render(request, 'coco/blog.html', {'posts': posts})
 
 
+def current_post(request, slug):
+    post = Post.objects.get(slug=slug)
+
+    context = {
+        'post': post,
+    }
+    return render(request, 'coco/post.html', context)
+
+
 def dest_bulgaria(request):
     posts = Post.objects.all()
     return render(request, 'coco/coco-bulgaria.html', {'posts': posts})

@@ -144,3 +144,8 @@ h1 {
     overflow: hidden;
 }
 
+.small.text-muted {
+    margin-bottom: 0.5rem;
+}
+
+
