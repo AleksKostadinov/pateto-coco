@@ -140,8 +140,10 @@ h1 {
 
 
 .card-body .card-text {
-    max-height: 72px;
+    max-height: 76px;
     overflow: hidden;
+    padding-bottom: 3rem;
+    padding-top: 0.5rem;
 }
 
 .small.text-muted {
