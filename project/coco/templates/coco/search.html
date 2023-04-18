@@ -3,10 +3,10 @@
 
 {% block content %}
 
-    <section class="container my-5 text-center">
+    <section class="container my-5">
                 <div class="col-7 mx-auto">
                     {% if searched %}
-                        <h2>Results for {{ searched }}</h2>
+                        <h2>Results for "{{ searched }}":</h2>
                         <br>
                         <div class="row">
                             {% for post in posts %}
