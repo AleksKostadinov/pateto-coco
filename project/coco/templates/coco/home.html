@@ -1,7 +1,6 @@
 {% extends 'coco/base.html' %}
 {% load static %}
 {% block content %}
-
     <section id="hero">
         <img src="{% static '/coco/images/hero-bg.png' %}" alt="" class="hero-bg">
     </section>
@@ -9,13 +8,14 @@
     <!-- Page content-->
     <div class="container">
         <div class="row">
-            <!-- Blog entries-->
-            <div class="col-lg-8 mx-auto">
-                <!-- Featured blog post-->
+            <div class="col-lg-12">
+                <!-- Featured blog post -->
+                <section class="d-flex flex-wrap">
                     {% if pinned %}
-                        <div class="card mb-4">
-                            <a href="{% url 'coco-post' pinned.slug %}"><img class="card-img-top" src="{{ pinned.image.url }}"
-                                             alt="..."/></a>
+                        <div class="card mb-4 col-lg-7 feature">
+                            <a href="{% url 'coco-post' pinned.slug %}"><img class="card-img-top"
+                                                                             src="{{ pinned.image.url }}"
+                                                                             alt="..."/></a>
                             <div class="card-body">
                                 <h2 class="card-title">Random pinned post: {{ pinned.title }}</h2>
                                 <div class="small text-muted">{{ pinned.created_at }}</div>
@@ -24,59 +24,38 @@
                             </div>
                         </div>
                     {% endif %}
-                <!-- Nested row for non-featured blog posts-->
-            <h2>Latest posts:</h2>
+                    <div class="offset-lg-1 feature"></div>
+                    <div class="card mb-4 col-lg-4 feature">
+                        <!-- Side widget -->
+                        <div class="card-header">Side Widget</div>
+                        <div class="card-body">
+                            You can put anything you want inside of these side widgets. They are easy to use, and
+                            feature the Bootstrap 5 card component!
+                        </div>
+                    </div>
+                </section>
+                <!-- Latest posts -->
+                <h2>Latest posts:</h2>
                 <div class="row">
                     {% for last_post in last_posts %}
                         {% if last_post.status %}
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <!-- Blog post-->
                                 <div class="card mb-4">
-                                    <a href="{% url 'coco-post' last_post.slug %}"><img class="card-img-top fixed-height-img"
-                                                      src="{{ last_post.image.url }}" alt="..."/></a>
+                                    <a href="{% url 'coco-post' last_post.slug %}"><img
+                                            class="card-img-top fixed-height-img" src="{{ last_post.image.url }}"
+                                            alt="..."/></a>
                                     <div class="card-body card-body-custom">
                                         <h2 class="card-title h4">{{ last_post.title }}</h2>
                                         <div class="small text-muted">{{ last_post.created_at }}</div>
                                         <p class="card-text">{{ last_post.resume }}</p>
-                                        <a class="btn btn-primary" href="{% url 'coco-post' last_post.slug %}">Read more</a>
+                                        <a class="btn btn-primary" href="{% url 'coco-post' last_post.slug %}">Read
+                                            more</a>
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %}
-                </div>
-
-            </div>
-            <!-- Side widgets-->
-            <div class="col-lg-4">
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#">Web Design</a></li>
-                                    <li><a href="#">HTML</a></li>
-                                    <li><a href="#">Freebies</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#">JavaScript</a></li>
-                                    <li><a href="#">CSS</a></li>
-                                    <li><a href="#">Tutorials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Side widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
-                        use, and feature the Bootstrap 5 card component!
-                    </div>
                 </div>
             </div>
         </div>

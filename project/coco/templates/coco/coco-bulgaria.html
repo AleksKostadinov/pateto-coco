@@ -13,7 +13,7 @@
                             <!-- Preview image figure-->
                             <div class="card-body card-body-custom">
                                 <h2 class="card-title h4">{{ post.title }}</h2>
-                                <div class="small text-muted">Posted on {{ post.created_at }} by {{ post.author }}</div>
+                                <div class="small text-muted">Posted on {{ post.created_at }} by {{ post.author.first_name }} {{ post.author.last_name }}</div>
                                 <a href="{% url 'coco-post' post.slug %}"><img class="card-img-top" src="{{ post.image.url }}"
                                                  alt="..."/></a>
 

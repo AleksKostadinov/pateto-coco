@@ -5,7 +5,7 @@ from random import choice
 
 
 def get_recent_posts():
-    return Post.objects.filter(status='Published')[:4]
+    return Post.objects.filter(status='Published')[:6]
 
 
 def get_random_pinned_post():

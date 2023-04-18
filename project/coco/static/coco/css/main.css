@@ -140,7 +140,7 @@ h1 {
 
 
 .card-body .card-text {
-    max-height: 76px;
+    max-height: 56px;
     overflow: hidden;
     padding-bottom: 3rem;
     padding-top: 0.5rem;
@@ -167,5 +167,17 @@ main {
     margin: 1rem;
   /*flex-shrink: 0;*/
   /*min-height: 50px;*/
+}
+
+.col-lg-7.feature {
+    width: 66%;
+}
+
+.col-lg-4.feature {
+    width: 32%;
+}
+
+.offset-lg-1.feature {
+    margin-left: 2%;
 }
 
