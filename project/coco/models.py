@@ -24,6 +24,7 @@ class Post(models.Model):
     status = models.TextField(choices=STATUS, default='Draft')
     favourite = models.BooleanField(default=False)
     destination = models.TextField(choices=DESTINATION, default='Bulgaria')
+    pinned = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_at']

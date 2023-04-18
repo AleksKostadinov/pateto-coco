@@ -12,21 +12,20 @@
             <!-- Blog entries-->
             <div class="col-lg-8">
                 <!-- Featured blog post-->
-                {% for post in posts %}
-                    {% if post.favourite == True and post.status %}
+                    {% if pinned %}
                         <div class="card mb-4">
-                            <a href="{% url 'coco-post' post.slug %}"><img class="card-img-top" src="{{ post.image.url }}"
+                            <a href="{% url 'coco-post' pinned.slug %}"><img class="card-img-top" src="{{ pinned.image.url }}"
                                              alt="..."/></a>
                             <div class="card-body">
-                                <h2 class="card-title">Featured Post: {{ post.title }}</h2>
-                                <div class="small text-muted">{{ post.created_at }}</div>
-                                <p class="card-text">{{ post.resume }}</p>
-                                <a class="btn btn-primary" href="{% url 'coco-post' post.slug %}">Read more</a>
+                                <h2 class="card-title">Random pinned post: {{ pinned.title }}</h2>
+                                <div class="small text-muted">{{ pinned.created_at }}</div>
+                                <p class="card-text">{{ pinned.resume }}</p>
+                                <a class="btn btn-primary" href="{% url 'coco-post' pinned.slug %}">Read more</a>
                             </div>
                         </div>
                     {% endif %}
-                {% endfor %}
                 <!-- Nested row for non-featured blog posts-->
+            <h2>Latest posts:</h2>
                 <div class="row">
                     {% for last_post in last_posts %}
                         {% if last_post.status %}

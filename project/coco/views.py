@@ -1,16 +1,23 @@
 from django.shortcuts import render
 from .models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from random import choice
 
 
 def get_recent_posts():
     return Post.objects.filter(status='Published')[:4]
 
 
+def get_random_pinned_post():
+    pinned_posts = Post.objects.filter(pinned=True, status='Published')
+    return choice(pinned_posts) if pinned_posts else None
+
+
 def home(request):
     last_posts = get_recent_posts()
     posts = Post.objects.all()
-    return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts})
+    pinned = get_random_pinned_post()
+    return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts, 'pinned': pinned})
 
 
 def blog(request):
@@ -111,9 +118,19 @@ def coco_places(request):
                   {'page': page,
                    'post_list': post_list})
 
+
 def dest_where(request):
     return render(request, 'coco/coco-where.html')
 
 
 def about(request):
     return render(request, 'coco/about.html')
+
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        posts = Post.objects.filter(title__contains=searched)
+        return render(request, 'coco/search.html', {'searched': searched, 'posts': posts})
+
+    return render(request, 'coco/search.html')

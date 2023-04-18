@@ -11,4 +11,5 @@ urlpatterns = [
     path('places', views.coco_places, name='coco-places'),
     path('where', views.dest_where, name='coco-where'),
     path('about', views.about, name='coco-about'),
+    path('search', views.search, name='coco-search'),
 ]

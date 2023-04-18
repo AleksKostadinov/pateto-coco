@@ -39,8 +39,10 @@
                 </li>
             </ul>
             <img src="{% static 'coco/images/pateto-coco-low-resolution-logo.png' %}" alt="logo" class="logo">
-            <form class="d-flex" role="search" id="search-placeholder">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" id="search-placeholder" method=POST
+                  action="{% url 'coco-search' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
                 <button class="btn btn-duck-blue" type="submit">Search</button>
             </form>
         </div>
