@@ -233,3 +233,7 @@ main {
 .btn-secondary{
     opacity: var(--bs-btn-disabled-opacity);
 }
+
+.card-body {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
