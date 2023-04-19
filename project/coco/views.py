@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
@@ -20,26 +20,8 @@ def home(request):
     return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts, 'pinned': pinned})
 
 
-def blog(request):
-    object_list = Post.objects.filter(status='Published').order_by('-created_at')
-    paginator = Paginator(object_list, 3)
-    page = request.GET.get('page')
-    try:
-        post_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        post_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        post_list = paginator.page(paginator.num_pages)
-    return render(request,
-                  'coco/blog.html',
-                  {'page': page,
-                   'post_list': post_list})
-
-
 def current_post(request, slug):
-    post = Post.objects.get(slug=slug)
+    post = get_object_or_404(Post, slug=slug, status='Published')
 
     context = {
         'post': post,
@@ -47,76 +29,42 @@ def current_post(request, slug):
     return render(request, 'coco/post.html', context)
 
 
-def dest_bulgaria(request):
-    object_list = Post.objects.filter(status='Published', destination='Bulgaria').order_by('-created_at')
-    paginator = Paginator(object_list, 2)
+def paginate_queryset(request, queryset, num_per_page=3):
+    paginator = Paginator(queryset, num_per_page)
     page = request.GET.get('page')
     try:
-        post_list = paginator.page(page)
+        paginated_queryset = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        post_list = paginator.page(1)
+        # If page is not an integer, deliver the first page.
+        paginated_queryset = paginator.page(1)
     except EmptyPage:
-        # If page is out of range deliver last page of results
-        post_list = paginator.page(paginator.num_pages)
-    return render(request,
-                  'coco/coco-bulgaria.html',
-                  {'page': page,
-                   'post_list': post_list})
+        # If page is out of range, deliver the last page of results.
+        paginated_queryset = paginator.page(paginator.num_pages)
+    return paginated_queryset, page
+
+
+def blog(request):
+    queryset = Post.objects.filter(status='Published').order_by('-created_at')
+    post_list, page = paginate_queryset(request, queryset)
+    return render(request, 'coco/blog.html', {'page': page, 'post_list': post_list})
+
+
+def dest_bulgaria(request):
+    queryset = Post.objects.filter(status='Published', destination='Bulgaria').order_by('-created_at')
+    post_list, page = paginate_queryset(request, queryset, num_per_page=2)
+    return render(request, 'coco/coco-bulgaria.html', {'page': page, 'post_list': post_list})
 
 
 def dest_abroad(request):
-    object_list = Post.objects.filter(status='Published', destination='Abroad').order_by('-created_at')
-    paginator = Paginator(object_list, 2)
-    page = request.GET.get('page')
-    try:
-        post_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        post_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        post_list = paginator.page(paginator.num_pages)
-    return render(request,
-                  'coco/coco-abroad.html',
-                  {'page': page,
-                   'post_list': post_list})
+    queryset = Post.objects.filter(status='Published', destination='Abroad').order_by('-created_at')
+    post_list, page = paginate_queryset(request, queryset, num_per_page=2)
+    return render(request, 'coco/coco-abroad.html', {'page': page, 'post_list': post_list})
 
 
 def dest_favourites(request):
-    object_list = Post.objects.filter(status='Published', favourite=True).order_by('-created_at')
-    paginator = Paginator(object_list, 3)
-    page = request.GET.get('page')
-    try:
-        post_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        post_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        post_list = paginator.page(paginator.num_pages)
-    return render(request,
-                  'coco/coco-favourites.html',
-                  {'page': page,
-                   'post_list': post_list})
-
-
-def coco_places(request):
-    object_list = Post.objects.filter(status='Published', favourite=True).order_by('-created_at')
-    paginator = Paginator(object_list, 3)
-    page = request.GET.get('page')
-    try:
-        post_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        post_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        post_list = paginator.page(paginator.num_pages)
-    return render(request,
-                  'coco/coco-places.html',
-                  {'page': page,
-                   'post_list': post_list})
+    queryset = Post.objects.filter(status='Published', favourite=True).order_by('-created_at')
+    post_list, page = paginate_queryset(request, queryset)
+    return render(request, 'coco/coco-favourites.html', {'page': page, 'post_list': post_list})
 
 
 def dest_where(request):
