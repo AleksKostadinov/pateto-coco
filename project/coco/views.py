@@ -75,6 +75,10 @@ def about(request):
     return render(request, 'coco/about.html')
 
 
+def contact(request):
+    return render(request, 'coco/coco-contact.html')
+
+
 def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']

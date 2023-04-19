@@ -28,7 +28,8 @@ nav.bg-body-tertiary {
 img.logo {
     width: 25%;
     /*display: block;*/
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    margin-right: 70px;
 }
 
 .post-title {
@@ -93,6 +94,10 @@ footer .col-lg-12 {
     text-decoration: none; /* remove the underline from the link */
 }
 
+.navbar-brand {
+    margin-right: 0.275rem;
+}
+
 h1 {
     margin-top: 3rem;
 }
@@ -118,9 +123,9 @@ h1 {
     display: none;
 }
 
-/*.navbar-nav {*/
-/*  margin-left: 2rem; !* add some space between logo and buttons *!*/
-/*}*/
+.navbar-nav {
+  margin-left: 0.25rem; /* add some space between logo and buttons */
+}
 
 #search-placeholder {
     margin-left: auto;
@@ -191,3 +196,8 @@ main {
 .btn {
     --bs-btn-font-size: 0.875rem;
 }
+
+.page-section {
+  padding: 6rem 0;
+}
+

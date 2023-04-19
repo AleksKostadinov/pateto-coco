@@ -10,5 +10,6 @@ urlpatterns = [
     path('favourites', views.dest_favourites, name='coco-favourites'),
     path('where', views.dest_where, name='coco-where'),
     path('about', views.about, name='coco-about'),
+    path('contact', views.contact, name='coco-contact'),
     path('search', views.search, name='coco-search'),
 ]
