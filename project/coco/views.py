@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
+from .forms import CommentForm
 
 
 def get_recent_posts():
@@ -18,15 +19,6 @@ def home(request):
     posts = Post.objects.all()
     pinned = get_random_pinned_post()
     return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts, 'pinned': pinned})
-
-
-def current_post(request, slug):
-    post = get_object_or_404(Post, slug=slug, status='Published')
-
-    context = {
-        'post': post,
-    }
-    return render(request, 'coco/post.html', context)
 
 
 def paginate_queryset(request, queryset, num_per_page=3):
@@ -86,3 +78,26 @@ def search(request):
         return render(request, 'coco/search.html', {'searched': searched, 'posts': posts})
 
     return render(request, 'coco/search.html')
+
+
+def current_post(request, slug):
+    post = get_object_or_404(Post, slug=slug, status='Published')
+    comments = post.comments.filter(active=True)
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = post
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'coco/post.html', {'post': post,
+                                              'comments': comments,
+                                              'new_comment': new_comment,
+                                              'comment_form': comment_form})
