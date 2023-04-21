@@ -49,3 +49,22 @@ class Comment(models.Model):
         return f'Comment by {self.name} on {self.created_on}'
 
 
+class Subscribers(models.Model):
+    email = models.EmailField(null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Subscribers"
+
+    def __str__(self):
+        return self.email
+
+
+class MailMessage(models.Model):
+    title = models.CharField(max_length=100, null=True)
+    message = models.TextField(null=True)  # Null not needed in production
+
+    def __str__(self):
+        return self.title
+
+

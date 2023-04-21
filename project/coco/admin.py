@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, MailMessage, Subscribers
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -21,9 +21,11 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'body')
     actions = ['approve_comments']
 
-    @staticmethod
-    def approve_comments(request, queryset):
+    def approve_comments(self, request, queryset):
         queryset.update(active=True)
 
 
 admin.site.register(Comment, CommentAdmin)
+
+admin.site.register(MailMessage)
+admin.site.register(Subscribers)

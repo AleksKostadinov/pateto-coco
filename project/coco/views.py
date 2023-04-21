@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
-from .forms import CommentForm
+from .forms import CommentForm, SubscribersForm
 
 
 def get_recent_posts():
@@ -15,10 +16,21 @@ def get_random_pinned_post():
 
 
 def home(request):
+    if request.method == 'POST':
+        form = SubscribersForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True})
+        else:
+            errors = dict(form.errors.items())
+            return JsonResponse({'success': False, 'errors': errors})
+    else:
+        form = SubscribersForm()
+
     last_posts = get_recent_posts()
     posts = Post.objects.all()
     pinned = get_random_pinned_post()
-    return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts, 'pinned': pinned})
+    return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts, 'pinned': pinned, 'form': form})
 
 
 def paginate_queryset(request, queryset, num_per_page=3):

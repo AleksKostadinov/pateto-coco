@@ -1,9 +1,9 @@
 {% extends 'coco/base.html' %}
-{% load crispy_forms_filters %}
 {% load static %}
-
+{% load crispy_forms_filters %}
+{#{% load crispy_forms_tags %}#}
 {% block content %}
-    {% load crispy_forms_tags %}
+
     <!-- Page content-->
     <div class="container mt-5">
         <div class="row">
@@ -61,7 +61,7 @@
                                         <div class="col-8">
                                             <h5 class="mt-1">{{ comment.name }}</h5>
                                             <p class="mb-3 text-muted"><small>{{ comment.created_on }}</small></p>
-                                            <div class="card-body">
+                                            <div class="card-body mb-4">
                                                 <p class="m-auto text-muted">{{ comment.body }}</p>
                                             </div>
                                         </div>
@@ -69,7 +69,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-
                         <div class="row">
                             <hr>
                             <div class="col">
@@ -78,12 +77,10 @@
                                         Your comment is awaiting moderation
                                     </div>
                                 {% else %}
-
-
                                     <h3 class="mb-4">Leave a comment</h3>
                                     <form method="post">
                                         {% csrf_token %}
-                                        {{ comment_form  | crispy }}
+                                        {{ comment_form|crispy }}
                                         <button class="btn btn-primary" type="submit">Post Comment</button>
                                     </form>
                                 {% endif %}

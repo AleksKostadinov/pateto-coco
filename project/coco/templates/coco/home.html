@@ -1,5 +1,7 @@
 {% extends 'coco/base.html' %}
 {% load static %}
+{% load crispy_forms_filters %}
+{#{% load crispy_forms_tags %}#}
 {% block content %}
     <section id="hero">
         <img src="{% static '/coco/images/hero-bg.png' %}" alt="" class="hero-bg">
@@ -64,44 +66,54 @@
                     <div class="container px-4 px-lg-5">
                         <div class="row gx-4 gx-lg-5">
                             <div class="col-md-10 col-lg-8 mx-auto text-center">
-                                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
                                 <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-
-                                <form class="form-signup" id="contactForm">
-                                    <!-- Email address input-->
-                                    <div class="row input-group-newsletter">
-                                        <div class="col">
-                                            <input class="form-control" id="emailAddress" type="email"
-                                                   placeholder="Enter email address..."
-                                                   aria-label="Enter email address..."
-                                                   data-sb-validations="required,email">
+                                <div class="mx-auto">
+                                    <form class="form-signup" id="contactForm" method="POST">
+                                        <div class="row input-group-newsletter">
+                                            <div class="col">
+                                                {{ form|crispy }}
+                                                {% csrf_token %}
+                                            </div>
+                                            <div class="col-auto d-flex align-items-center">
+                                                <button class="btn btn-secondary" id="submitButton" type="submit">
+                                                    Notify Me!
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="col-auto d-flex align-items-center">
-                                            <button class="btn btn-secondary" id="submitButton" type="submit"
-                                                    style="height: 100%;">
-                                                Notify Me!
-                                            </button>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="d-none" id="submitSuccessMessage">
-                                        <div class="text-center mb-3 mt-2 text-white">
-                                            <div class="fw-bolder">Form submission successful!</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-none" id="submitErrorMessage">
-                                        <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
-                                    </div>
-                                </form>
+                                    </form>
+                                    <div id="error-msg"></div> <!-- empty div for error message -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
+
             </div>
         </div>
     </div>
+    <script>
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // prevent the form from submitting normally
+            const formData = new FormData(form); // create a FormData object from the form
+            fetch('/', { // replace '/' with the URL of your form submission endpoint
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Thank you for subscribing!');
+                    } else {
+                        alert('Please enter a valid email!');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('An error occurred. Please try again later.');
+                });
+        });
+    </script>
 
 {% endblock %}
