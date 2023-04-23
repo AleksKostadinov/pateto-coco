@@ -61,8 +61,11 @@ class Subscribers(models.Model):
 
 
 class MailMessage(models.Model):
+    email = models.EmailField()
     title = models.CharField(max_length=100, null=True)
-    message = models.TextField(null=True)  # Null not needed in production
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.email
+

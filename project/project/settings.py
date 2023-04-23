@@ -1,4 +1,10 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -6,13 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-oyol^kdp(he=a6t#$mtzuqbhy-si9c#19#=%wy=1zw7)m$-wvk'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-ALLOWED_HOSTS = []
+DEBUG = int(os.environ.get('DEBUG', 1))
+
+ALLOWED_HOSTS = os.environ.get('SERVERNAMES', '').split(' ')
 
 # Application definition
 
@@ -115,3 +120,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+
+CONTACT_EMAIL = 'patetococo@gmail.com'
+

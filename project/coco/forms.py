@@ -1,6 +1,5 @@
 from .models import Comment, Subscribers, MailMessage
 from django import forms
-# from .utils import is_valid_email
 
 
 class CommentForm(forms.ModelForm):
@@ -24,3 +23,23 @@ class SubscribersForm(forms.ModelForm):
     #     if not is_valid_email(email):
     #         raise forms.ValidationError("Invalid email address")
     #     return email
+
+
+class MailMessageForm(forms.ModelForm):
+    class Meta:
+        model = MailMessage
+        fields = ['email', 'title', 'message']
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Please enter so I can keep in touch with you.'
+            }),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'What best describes your epic quest?'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Let me know in the field below!'
+            })
+        }

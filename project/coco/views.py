@@ -1,9 +1,13 @@
+from datetime import datetime
+
+from django.conf import settings
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
-from .forms import CommentForm, SubscribersForm
+from .forms import CommentForm, SubscribersForm, MailMessageForm
 
 
 def get_recent_posts():
@@ -79,8 +83,47 @@ def about(request):
     return render(request, 'coco/about.html')
 
 
+# def contact(request):
+#     if request.method == 'POST':
+#         message_name = request.POST['message-name']
+#         message_email = request.POST['message-email']
+#         message = request.POST['message']
+#
+#         send_mail(
+#             message_name,
+#             message,
+#             message_email,
+#             ['patetococo@gmail.com'],
+#             fail_silently=False,
+#         )
+#
+#         return render(request, 'coco/coco-contact.html', {'message-name': message_name,
+#                                                           'message-email': message_email, 'message': message})
+#     else:
+#         return render(request, 'coco/coco-contact.html', {})
+
+
 def contact(request):
-    return render(request, 'coco/coco-contact.html')
+    if request.method == 'POST':
+        form = MailMessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["title"]}'
+            email_message = f'From: {form.cleaned_data["email"]}\n'
+            email_message += f'Date: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n\n'
+            email_message += f'Title: {form.cleaned_data["title"]}\n\n'
+            email_message += form.cleaned_data['message']
+            send_mail(
+                email_subject,
+                email_message,
+                settings.CONTACT_EMAIL,
+                ['patetococo@gmail.com'],
+            )
+            return render(request, 'coco/coco-success.html')
+    form = MailMessageForm()
+    context = {'form': form}
+    return render(request, 'coco/coco-contact.html', context)
+
 
 
 def search(request):

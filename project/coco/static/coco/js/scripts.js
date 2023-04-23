@@ -23,26 +23,3 @@ function myFunction() {
         logo.classList.add("hidden");
     }
 }
-
-// subscribe to newsletter
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', (event) => {
-    event.preventDefault(); // prevent the form from submitting normally
-    const formData = new FormData(form); // create a FormData object from the form
-    fetch('/', { // replace '/' with the URL of your form submission endpoint
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Thank you for subscribing!');
-            } else {
-                alert('Please enter a valid email!');
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            alert('An error occurred. Please try again later.');
-        });
-});
