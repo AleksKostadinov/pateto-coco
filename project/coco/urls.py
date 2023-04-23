@@ -12,4 +12,8 @@ urlpatterns = [
     path('where', views.dest_where, name='coco-where'),
     path('about', views.about, name='coco-about'),
     path('search', views.search, name='coco-search'),
+    # path('confirm/<str:token>/', views.confirm_subscription, name='confirm_subscription'),
+    # path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
+    # path('send-posts/', views.send_posts_to_subscribers, name='send_posts_to_subscribers'),
+
 ]

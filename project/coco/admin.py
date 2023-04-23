@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, MailMessage, Subscribers
+from .models import Post, Comment, Subscribers
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -27,5 +27,13 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Comment, CommentAdmin)
 
-admin.site.register(MailMessage)
-admin.site.register(Subscribers)
+
+class SubscribersAdmin(admin.ModelAdmin):
+    list_display = ('email', 'date')
+    list_filter = ('date', )
+    search_fields = ('email', )
+
+
+admin.site.register(Subscribers, SubscribersAdmin)
+
+
