@@ -1,0 +1,28 @@
+<div class="card mb-4 col-lg-4 feature">
+    <!-- Side widget -->
+    <div class="card-header bg-light text-black fw-bold">Coco's Compass</div>
+    <!-- Quote section -->
+    <div class="card-body quote-section">
+        <h5 class="card-title">Quote of the day:</h5>
+        <hr class="divider"/>
+        <blockquote class="blockquote">
+            <p class="mb-3">{{ quotes.quote }}</p>
+            <footer class="blockquote-footer">{{ quotes.author }}</footer>
+        </blockquote>
+    </div>
+    <!-- News section -->
+    <div class="card-body news-section">
+        <h5 class="card-title">Travel News:</h5>
+        <hr class="divider"/>
+        <ul class="list-group">
+            {% for item in news_articles %}
+                <li >
+                    <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+                    {% if item.description %}
+                        <p>{{ item.description }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

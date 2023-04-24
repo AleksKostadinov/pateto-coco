@@ -2,31 +2,40 @@
 {% load static %}
 
 {% block content %}
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <!-- Contact-->
-            <section class="page-section" id="contact">
-                <div class="container px-4 px-lg-5">
-                    <div class="row gx-4 gx-lg-5 justify-content-center">
-                        <div class="col-lg-8 col-xl-6 text-center">
-                            <h2 class="mt-0">Quack! Let's Get In Touch! </h2>
-                            <hr class="divider"/>
-                            <p class="text-muted mb-3">Are you ready for your next big adventure?
-                                <br>If so, send me a message and I'll get back to you as soon as possible! <br>Quack
-                                quack!</p>
+    <div class="about-contact">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <!-- Contact-->
+                <section class="page-section" id="contact">
+                    <div class="container px-4 px-lg-5">
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="col-lg-8 col-xl-6 text-center">
+                                <h1 class="mt-0">Quack! Let's Get In Touch! </h1>
+                                <hr class="divider"/>
+                                <p class="text-muted mb-3">Are you ready for your next big adventure?
+                                    <br>If so, send me a message and I'll get back to you as soon as possible! <br>Quack
+                                    quack!</p>
+                            </div>
+                        </div>
+                        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                            <div class="col-lg-6">
+                                <form method="post" id="contactForm">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="submit" class="btn btn-primary">Quack</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-                        <div class="col-lg-6">
-                            <form method="post" id="contactForm">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit" class="btn btn-primary">Quack</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </div>
+    <footer>
+        <div class="footer">
+            <div class="text-center">
+                Copyright &copy; 2023 Pateto Coco
+            </div>
+        </div>
+    </footer>
 {% endblock %}

@@ -3,96 +3,101 @@
 {% load crispy_forms_filters %}
 {#{% load crispy_forms_tags %}#}
 {% block content %}
-
-    <!-- Page content-->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <!-- Post content-->
-                <article>
-                    <!-- Post header-->
-                    <header class="mb-4">
-                        <!-- Post title-->
-                        <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-                        <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">Posted on {{ post.created_at }}
-                            by {{ post.author.first_name }} {{ post.author.last_name }}</div>
-                        <!-- Post categories-->
-                        {% if post.destination == 'Bulgaria' %}
-                            <a class="badge bg-secondary text-decoration-none link-light"
-                               href="{% url 'coco-bulgaria' %}">{{ post.destination }}</a>
-                        {% else %}
-                            <a class="badge bg-secondary text-decoration-none link-light"
-                               href="{% url 'coco-abroad' %}">{{ post.destination }}</a>
-                        {% endif %}
-                        {% if post.favourite %}
-                            <a class="badge bg-secondary text-decoration-none link-light"
-                               href="{% url 'coco-favourites' %}">{{ "Favourite" }}</a>
-                        {% endif %}
-                    </header>
-                    <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded"
-                                              src="{{ post.image.url }}" alt="..."/>
-                    </figure>
+    <div class="bg-custom">
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
                     <!-- Post content-->
-                    <section class="mb-5">
-                        <p class="fs-5 mb-4">{{ post.content }}</p>
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on {{ post.created_at }}
+                                by {{ post.author.first_name }} {{ post.author.last_name }}</div>
+                            <!-- Post categories-->
+                            {% if post.destination == 'Bulgaria' %}
+                                <a class="badge bg-secondary text-decoration-none link-light"
+                                   href="{% url 'coco-bulgaria' %}">{{ post.destination }}</a>
+                            {% else %}
+                                <a class="badge bg-secondary text-decoration-none link-light"
+                                   href="{% url 'coco-abroad' %}">{{ post.destination }}</a>
+                            {% endif %}
+                            {% if post.favourite %}
+                                <a class="badge bg-secondary text-decoration-none link-light"
+                                   href="{% url 'coco-favourites' %}">{{ "Favourite" }}</a>
+                            {% endif %}
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded"
+                                                  src="{{ post.image.url }}" alt="..."/>
+                        </figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{ post.content }}</p>
 
-                    </section>
-                </article>
-                <!-- Comments section-->
+                        </section>
+                    </article>
+                    <!-- Comments section-->
 
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <!-- comments -->
-                        {% with comments.count as total_comments %}
-                            <h2>Comments ({{ total_comments }}):</h2>
-                        {% endwith %}
-                        <br>
-                        {% for comment in comments %}
-                            <div class="row mb-4">
-                                <div class="col-2">
-                                    <img src="{% static 'coco/images/duck-insta.png' %}"
-                                         class="img-fluid rounded-circle"
-                                         alt="avatar"/>
-                                </div>
-                                <div class="col-10">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <h5 class="mt-1">{{ comment.name }}</h5>
-                                            <p class="mb-3 text-muted"><small>{{ comment.created_on }}</small></p>
-                                            <div class="card-body mb-4">
-                                                <p class="m-auto text-muted">{{ comment.body }}</p>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <!-- comments -->
+                            {% with comments.count as total_comments %}
+                                <h2>Comments ({{ total_comments }}):</h2>
+                            {% endwith %}
+                            <br>
+                            {% for comment in comments %}
+                                <div class="row mb-4">
+                                    <div class="col-2">
+                                        <img src="{% static 'coco/images/duck-insta.png' %}"
+                                             class="img-fluid rounded-circle"
+                                             alt="avatar"/>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h5 class="mt-1">{{ comment.name }}</h5>
+                                                <p class="mb-3 text-muted"><small>{{ comment.created_on }}</small></p>
+                                                <div class="card-body mb-4">
+                                                    <p class="m-auto text-muted">{{ comment.body }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                        <div class="row">
-                            <hr>
-                            <div class="col">
-                                {% if new_comment %}
-                                    <div class="alert alert-success" role="alert">
-                                        Your comment is awaiting moderation
-                                    </div>
-                                {% else %}
-                                    <h3 class="mb-4">Leave a comment</h3>
-                                    <form method="post">
-                                        {% csrf_token %}
-                                        {{ comment_form|crispy }}
-                                        <button class="btn btn-primary" type="submit">Post Comment</button>
-                                    </form>
-                                {% endif %}
+                            {% endfor %}
+                            <div class="row">
+                                <hr>
+                                <div class="col">
+                                    {% if new_comment %}
+                                        <div class="alert alert-success" role="alert">
+                                            Your comment is awaiting moderation
+                                        </div>
+                                    {% else %}
+                                        <h3 class="mb-4">Leave a comment</h3>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            {{ comment_form|crispy }}
+                                            <button class="btn btn-primary" type="submit">Post Comment</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer>
+            <div class="footer-home">
+                <div class="text-center">
+                    Copyright &copy; 2023 Pateto Coco
+                </div>
+            </div>
+        </footer>
     </div>
-
-
-
 
 {% endblock content %}

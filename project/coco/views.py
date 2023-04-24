@@ -1,6 +1,6 @@
 from datetime import datetime
-
 from django.conf import settings
+import requests
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -8,6 +8,7 @@ from .models import Post
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
 from .forms import CommentForm, SubscribersForm, MailMessageForm
+from newsapi import NewsApiClient
 
 
 def get_recent_posts():
@@ -34,7 +35,33 @@ def home(request):
     last_posts = get_recent_posts()
     posts = Post.objects.all()
     pinned = get_random_pinned_post()
-    return render(request, 'coco/home.html', {'posts': posts, 'last_posts': last_posts, 'pinned': pinned, 'form': form})
+    quotes = requests.get('https://api.goprogram.ai/inspiration').json()
+
+    # Initialize the NewsApiClient with your API key
+    newsapi = NewsApiClient(api_key='6823a028a34b4b11b09fdbf4f44fdd21')
+
+    all_articles = newsapi.get_everything(q='destination OR adventure OR travel', language='en', sort_by='relevancy',
+                                          page_size=3)
+
+    # Extract the news articles from the response
+    news_articles = []
+    for article in all_articles['articles']:
+        news_articles.append({
+            'title': article['title'],
+            'description': article['description'],
+            'url': article['url']
+        })
+
+    context = {
+        'posts': posts,
+        'last_posts': last_posts,
+        'pinned': pinned,
+        'form': form,
+        'quotes': quotes,
+        'news_articles': news_articles
+    }
+
+    return render(request, 'coco/home.html', context)
 
 
 def paginate_queryset(request, queryset, num_per_page=3):
@@ -83,26 +110,6 @@ def about(request):
     return render(request, 'coco/about.html')
 
 
-# def contact(request):
-#     if request.method == 'POST':
-#         message_name = request.POST['message-name']
-#         message_email = request.POST['message-email']
-#         message = request.POST['message']
-#
-#         send_mail(
-#             message_name,
-#             message,
-#             message_email,
-#             ['patetococo@gmail.com'],
-#             fail_silently=False,
-#         )
-#
-#         return render(request, 'coco/coco-contact.html', {'message-name': message_name,
-#                                                           'message-email': message_email, 'message': message})
-#     else:
-#         return render(request, 'coco/coco-contact.html', {})
-
-
 def contact(request):
     if request.method == 'POST':
         form = MailMessageForm(request.POST)
@@ -123,7 +130,6 @@ def contact(request):
     form = MailMessageForm()
     context = {'form': form}
     return render(request, 'coco/coco-contact.html', context)
-
 
 
 def search(request):

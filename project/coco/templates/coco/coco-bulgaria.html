@@ -2,42 +2,52 @@
 {% load static %}
 
 {% block content %}
-
-    <div class="container py-3">
-        <div class="row">
-            <div class="col-6 mx-auto">
-                {% for post in post_list %}
-{#                    {% if not post.destination %}#}
+    <div class="bg-custom">
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    {% for post in post_list %}
+                        {#                    {% if not post.destination %}#}
                         <!-- Post content-->
                         <div class="card mt-lg-5">
                             <!-- Preview image figure-->
                             <div class="card-body card-body-custom">
                                 <h2 class="card-title h4">{{ post.title }}</h2>
-                                <div class="small text-muted">Posted on {{ post.created_at }} by {{ post.author.first_name }} {{ post.author.last_name }}</div>
-                                <a href="{% url 'coco-post' post.slug %}"><img class="card-img-top" src="{{ post.image.url }}"
-                                                 alt="..."/></a>
+                                <div class="small text-muted">Posted on {{ post.created_at }}
+                                    by {{ post.author.first_name }} {{ post.author.last_name }}</div>
+                                <a href="{% url 'coco-post' post.slug %}"><img class="card-img-top"
+                                                                               src="{{ post.image.url }}"
+                                                                               alt="..."/></a>
 
                                 <p class="card-text">{{ post.resume }}</p>
                                 <a class="btn btn-primary" href="{% url 'coco-post' post.slug %}">Read more</a>
                             </div>
                         </div>
-{#                    {% endif %}#}
-                {% endfor %}
+                        {#                    {% endif %}#}
+                    {% endfor %}
+                </div>
             </div>
         </div>
+        {% if post_list.has_other_pages %}
+            <nav aria-label="Page navigation conatiner">
+                <ul class="pagination justify-content-center">
+                    {% if post_list.has_previous %}
+                        <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a>
+                        </li>
+                    {% endif %}
+                    {% if post_list.has_next %}
+                        <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+        <footer>
+            <div class="footer-home">
+                <div class="text-center">
+                    Copyright &copy; 2023 Pateto Coco
+                </div>
+            </div>
+        </footer>
     </div>
-{% if post_list.has_other_pages %}
-  <nav aria-label="Page navigation conatiner"></nav>
-  <ul class="pagination justify-content-center">
-    {% if post_list.has_previous %}
-    <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-    {% endif %}
-    {% if post_list.has_next %}
-    <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-   {% endif %}
-  </ul>
-  </nav>
-</div>
-{% endif %}
 
 {% endblock %}

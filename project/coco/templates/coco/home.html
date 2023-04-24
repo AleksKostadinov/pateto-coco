@@ -6,94 +6,96 @@
     <section id="hero">
         <img src="{% static '/coco/images/hero-bg.png' %}" alt="" class="hero-bg">
     </section>
-    <hr>
-    <!-- Page content-->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Featured blog post -->
-                <section class="d-flex flex-wrap">
-                    {% if pinned %}
-                        <div class="card mb-4 col-lg-7 feature">
-                            <a href="{% url 'coco-post' pinned.slug %}"><img class="card-img-top"
-                                                                             src="{{ pinned.image.url }}"
-                                                                             alt="..."/></a>
-                            <div class="card-body">
-                                <h2 class="card-title">Random pinned post: {{ pinned.title }}</h2>
-                                <div class="small text-muted">{{ pinned.created_at }}</div>
-                                <p class="card-text">{{ pinned.resume }}</p>
-                                <a class="btn btn-primary" href="{% url 'coco-post' pinned.slug %}">Read more</a>
-                            </div>
-                        </div>
-                    {% endif %}
-                    <div class="offset-lg-1 feature"></div>
-                    <div class="card mb-4 col-lg-4 feature">
-                        <!-- Side widget -->
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">
-                            You can put anything you want inside of these side widgets. They are easy to use, and
-                            feature the Bootstrap 5 card component!
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Latest posts -->
-                <h2>Latest posts:</h2>
-                <div class="row">
-                    {% for last_post in last_posts %}
-                        {% if last_post.status %}
-                            <div class="col-lg-4">
-                                <!-- Blog post-->
-                                <div class="card mb-4">
-                                    <a href="{% url 'coco-post' last_post.slug %}"><img
-                                            class="card-img-top fixed-height-img" src="{{ last_post.image.url }}"
-                                            alt="..."/></a>
-                                    <div class="card-body card-body-custom">
-                                        <h2 class="card-title h4">{{ last_post.title }}</h2>
-                                        <div class="small text-muted">{{ last_post.created_at }}</div>
-                                        <p class="card-text">{{ last_post.resume }}</p>
-                                        <a class="btn btn-primary" href="{% url 'coco-post' last_post.slug %}">Read
-                                            more</a>
-                                    </div>
+    <div class="bg-custom-home">
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Featured blog post -->
+                    <section class="d-flex flex-wrap">
+                        {% if pinned %}
+                            <div class="card mb-4 col-lg-7 feature">
+                                <a href="{% url 'coco-post' pinned.slug %}"><img class="card-img-top"
+                                                                                 src="{{ pinned.image.url }}"
+                                                                                 alt="..."/></a>
+                                <div class="card-body">
+                                    <h2 class="card-title">Random pinned post: {{ pinned.title }}</h2>
+                                    <div class="small text-muted">{{ pinned.created_at }}</div>
+                                    <p class="card-text">{{ pinned.resume }}</p>
+                                    <a class="btn btn-primary" href="{% url 'coco-post' pinned.slug %}">Read more</a>
                                 </div>
                             </div>
                         {% endif %}
-                    {% endfor %}
-                </div>
+                        <div class="offset-lg-1 feature"></div>
+                        {% include 'coco/sidebar.html' %}
+                    </section>
 
-                <!-- Signup-->
-                <section class="signup-section" id="signup">
-                    <div class="container px-4 px-lg-5">
-                        <div class="row gx-4 gx-lg-5">
-                            <div class="col-md-10 col-lg-8 mx-auto text-center">
-                                <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-                                <div class="mx-auto">
-                                    <form class="form-signup" id="contactForm" method="POST">
-                                        <div class="row input-group-newsletter">
-                                            <div class="col">
-                                                {{ form|crispy }}
-                                                {% csrf_token %}
-                                            </div>
-                                            <div class="col-auto d-flex align-items-center">
-                                                <button class="btn btn-secondary" id="submitButton" type="submit">
-                                                    Notify Me!
-                                                </button>
-                                            </div>
+                    <!-- Latest posts -->
+                    <h2>Latest posts:</h2>
+                    <div class="row">
+                        {% for last_post in last_posts %}
+                            {% if last_post.status %}
+                                <div class="col-lg-4">
+                                    <!-- Blog post-->
+                                    <div class="card mb-4">
+                                        <a href="{% url 'coco-post' last_post.slug %}"><img
+                                                class="card-img-top fixed-height-img" src="{{ last_post.image.url }}"
+                                                alt="..."/></a>
+                                        <div class="card-body card-body-custom">
+                                            <h2 class="card-title h4">{{ last_post.title }}</h2>
+                                            <div class="small text-muted">{{ last_post.created_at }}</div>
+                                            <p class="card-text">{{ last_post.resume }}</p>
+                                            <a class="btn btn-primary" href="{% url 'coco-post' last_post.slug %}">Read
+                                                more</a>
                                         </div>
-                                    </form>
-                                    <div id="error-msg"></div> <!-- empty div for error message -->
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Signup-->
+                    <section class="signup-section" id="signup">
+                        <div class="container px-4 px-lg-5">
+                            <div class="row gx-4 gx-lg-5">
+                                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                                    <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+                                    <div class="mx-auto">
+                                        <form class="form-signup" id="contactForm" method="POST">
+                                            <div class="row input-group-newsletter">
+                                                <div class="col">
+                                                    {{ form|crispy }}
+                                                    {% csrf_token %}
+                                                </div>
+                                                <div class="col-auto d-flex align-items-center">
+                                                    <button class="btn btn-secondary" id="submitButton" type="submit">
+                                                        Notify Me!
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div id="error-msg"></div> <!-- empty div for error message -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
 
+                </div>
             </div>
         </div>
+        <footer>
+            <div class="footer-home">
+                <div class="text-center">
+                    Copyright &copy; 2023 Pateto Coco
+                </div>
+            </div>
+        </footer>
     </div>
 
-<script>
+
+    <script>
         const form = document.getElementById('contactForm');
         form.addEventListener('submit', (event) => {
             event.preventDefault(); // prevent the form from submitting normally
