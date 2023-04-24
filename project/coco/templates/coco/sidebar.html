@@ -17,7 +17,7 @@
         <ul class="list-group">
             {% for item in news_articles %}
                 <li >
-                    <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+                    <a href="{{ item.url }}" target="_blank" class="text-decoration-none">{{ item.title }}</a>
                     {% if item.description %}
                         <p>{{ item.description }}</p>
                     {% endif %}

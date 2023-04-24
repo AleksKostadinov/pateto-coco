@@ -129,5 +129,5 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 
-CONTACT_EMAIL = 'patetococo@gmail.com'
+CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from django.conf import settings
 import requests
@@ -38,7 +39,7 @@ def home(request):
     quotes = requests.get('https://api.goprogram.ai/inspiration').json()
 
     # Initialize the NewsApiClient with your API key
-    newsapi = NewsApiClient(api_key='6823a028a34b4b11b09fdbf4f44fdd21')
+    newsapi = NewsApiClient(api_key=os.environ.get('NEWS_API_KEY'))
 
     all_articles = newsapi.get_everything(q='destination OR adventure OR travel', language='en', sort_by='relevancy',
                                           page_size=3)
@@ -124,7 +125,7 @@ def contact(request):
                 email_subject,
                 email_message,
                 settings.CONTACT_EMAIL,
-                ['patetococo@gmail.com'],
+                [os.environ.get('RECEPIENT_EMAIL')],
             )
             return render(request, 'coco/coco-success.html')
     form = MailMessageForm()
