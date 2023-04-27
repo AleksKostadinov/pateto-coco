@@ -105,13 +105,37 @@ def dest_favourites(request):
 
 
 def dest_where(request):
-    places_visited = PlacesVisited.objects.all()
+    places = PlacesVisited.objects.all()
 
     m = folium.Map(location=[47.751569, 10.675063], zoom_start=5)
 
-    for place in places_visited:
+    for place in places:
         coordinates = (place.latitude, place.longitude)
-        folium.Marker(coordinates).add_to(m)
+        popup_filled = f"<h3>{place.title}</h3><img src='{place.image.url}' " \
+                       f"width=300px><p>{place.resume}</p><p>{place.date}</p>"
+        if place.place_status == 'Loved':
+            folium.Marker(coordinates,
+                          popup=popup_filled,
+                          tooltip=f'{place.tooltip}',
+                          icon=folium.Icon(prefix='fa', icon='fa-heartbeat', color='red')).add_to(m)
+        elif place.place_status == 'Home':
+            folium.Marker(coordinates,
+                          popup=popup_filled,
+                          tooltip=f'{place.tooltip}',
+                          icon=folium.Icon(icon='home', color='green')).add_to(m)
+        elif place.place_status == 'Wanted':
+            folium.Marker(coordinates,
+                          popup='Wanted: '+popup_filled,
+                          tooltip=f'{place.tooltip}',
+                          icon=folium.Icon(prefix='fa', icon='fa-plane', color='purple')).add_to(m)
+
+        else:
+            folium.Marker(coordinates,
+                          popup=popup_filled,
+                          tooltip=f'{place.tooltip}',
+                          icon=folium.features.CustomIcon(
+                              'https://aleks-kostadinov.s3.eu-central-1.amazonaws.com/images/duck-blue.png',
+                              icon_size=(28, 28))).add_to(m)
 
     context = {'map': m._repr_html_()}
     return render(request, 'coco/coco-where.html', context)

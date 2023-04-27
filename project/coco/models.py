@@ -72,13 +72,26 @@ class MailMessage(models.Model):
 
 
 class PlacesVisited(models.Model):
+    PLACE_STATUS = (
+        ('Loved', 'Loved'),
+        ('Home', 'Home'),
+        ('Default', 'Default'),
+        ('Wanted', 'Wanted'),
+    )
+
     places = models.CharField(max_length=250)
+    title = models.CharField(max_length=100)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    date = models.DateField()
+    image = models.ImageField(upload_to='images')
+    resume = models.CharField(max_length=100)
+    tooltip = models.CharField(max_length=100)
+    date = models.DateField(null=True, blank=True)
+    place_status = models.CharField(max_length=7, choices=PLACE_STATUS, default='Default')
 
     class Meta:
         verbose_name_plural = "Places Visited"
 
     def __str__(self):
         return self.places
+
