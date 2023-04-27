@@ -37,7 +37,7 @@ Current post page
 Places explored page
 ------------
 
-![Page](https://aleks-kostadinov.s3.eu-central-1.amazonaws.com/images/places-explored(1).png)
+![Page](https://aleks-kostadinov.s3.eu-central-1.amazonaws.com/images/places-explored.png)
 
 
 Contact page
