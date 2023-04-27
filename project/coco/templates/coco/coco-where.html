@@ -2,13 +2,12 @@
 {% load static %}
 
 {% block content %}
-    <div class="bg-custom">
-        <div class="container py-5">
-            <h1 class="text-center mb-5">Where to go?</h1>
-            <div class="row justify-content-center">
-            </div>
+        <div class="bg-custom visited">
+        <div class="col-8">
+            {{ map|safe }}
         </div>
     </div>
+
     <footer>
         <div class="footer">
             <div class="text-center">
@@ -16,4 +15,6 @@
             </div>
         </div>
     </footer>
+
+
 {% endblock %}

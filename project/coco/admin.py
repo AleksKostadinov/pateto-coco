@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Subscribers, MailMessage
+from .models import Post, Comment, Subscribers, MailMessage, PlacesVisited
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -44,3 +44,12 @@ class MailMessageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MailMessage, MailMessageAdmin)
+
+
+class PlacesVisitedAdmin(admin.ModelAdmin):
+    list_display = ('places', 'latitude', 'longitude', 'date')
+    list_filter = ('places', 'date')
+    search_fields = ('places',)
+
+
+admin.site.register(PlacesVisited, PlacesVisitedAdmin)

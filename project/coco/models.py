@@ -69,3 +69,16 @@ class MailMessage(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class PlacesVisited(models.Model):
+    places = models.CharField(max_length=250)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    date = models.DateField()
+
+    class Meta:
+        verbose_name_plural = "Places Visited"
+
+    def __str__(self):
+        return self.places

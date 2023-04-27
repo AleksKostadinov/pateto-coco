@@ -1,11 +1,12 @@
 import os
+import requests
+import folium
 from datetime import datetime
 from django.conf import settings
-import requests
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, PlacesVisited
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
 from .forms import CommentForm, SubscribersForm, MailMessageForm
@@ -104,7 +105,16 @@ def dest_favourites(request):
 
 
 def dest_where(request):
-    return render(request, 'coco/coco-where.html')
+    places_visited = PlacesVisited.objects.all()
+
+    m = folium.Map(location=[47.751569, 10.675063], zoom_start=5)
+
+    for place in places_visited:
+        coordinates = (place.latitude, place.longitude)
+        folium.Marker(coordinates).add_to(m)
+
+    context = {'map': m._repr_html_()}
+    return render(request, 'coco/coco-where.html', context)
 
 
 def about(request):
