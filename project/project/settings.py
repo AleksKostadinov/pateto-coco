@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'crispy_bootstrap5',
+    'ckeditor',
 
     'coco',
 ]
@@ -131,3 +132,10 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}

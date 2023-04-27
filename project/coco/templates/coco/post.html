@@ -1,13 +1,13 @@
 {% extends 'coco/base.html' %}
 {% load static %}
 {% load crispy_forms_filters %}
-{#{% load crispy_forms_tags %}#}
+
 {% block content %}
     <div class="bg-custom">
         <!-- Page content-->
-        <div class="container mt-5">
+        <div class="container py-3">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-9 mx-auto">
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
@@ -36,7 +36,7 @@
                         </figure>
                         <!-- Post content-->
                         <section class="mb-5">
-                            <p class="fs-5 mb-4">{{ post.content }}</p>
+                            <p class="fs-5 mb-4">{{ post.content|safe }}</p>
 
                         </section>
                     </article>

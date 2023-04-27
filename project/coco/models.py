@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Post(models.Model):
@@ -18,7 +19,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images')
     resume = models.TextField(max_length=500)
-    content = models.TextField()
+    content = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.TextField(choices=STATUS, default='Draft')
@@ -68,4 +69,3 @@ class MailMessage(models.Model):
 
     def __str__(self):
         return self.email
-
