@@ -57,7 +57,7 @@ Installation
 To install and run the site locally, follow these steps:
 
 1.  Clone the repository: `git clone https://github.com/AleksKostadinov/pateto-coco.git`
-2.  Navigate to the project directory: `cd todo_app`
+2.  Navigate to the project directory: `cd pateto-coco`
 3.  Install the dependencies: `pip install -r requirements.txt`
 4.  Set up the database: `python manage.py migrate`
 5.  Start the development server: `python manage.py runserver`
@@ -70,7 +70,6 @@ Technologies Used
 -   HTML
 -   CSS
 -   Bootstrap
--   PostgreSQL
 
 Contributing
 ------------
