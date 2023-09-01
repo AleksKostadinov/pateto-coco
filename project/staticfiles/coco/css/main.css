@@ -1,0 +1,310 @@
+
+#hero .hero-bg {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+nav.bg-body-tertiary {
+    /*background-color: blue !important;*/
+    /*padding-top: 0;*/
+    /*padding-bottom: 0;*/
+    /*border-bottom: none;*/
+    background-color: transparent !important;
+    transition: background-color 0.3s ease-in-out;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+
+}
+
+img.logo {
+    width: 25%;
+    /*display: block;*/
+    /*margin: 0 auto;*/
+    margin-right: 70px;
+}
+
+.post-title {
+    margin: 2rem 2rem;
+}
+
+.img-posts-top {
+    margin: 2rem 2rem;
+    width: 30%;
+}
+
+.p-content {
+    margin: 2rem 2rem;
+    width: 60%;
+}
+
+.post-published {
+    margin: 2rem 2rem;
+}
+
+.section-post .img-posts-top,
+.section-post p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar.transparent {
+    background-color: transparent !important;
+    transition: background-color 0.5s ease-in-out;
+}
+
+
+.navbar.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white !important;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+}
+
+.navbar-nav .nav-link {
+    color: #333; /* set the color of the link */
+    font-weight: 600; /* set the font weight to make it more bold */
+    padding: 5px 15px; /* add some padding to make the links easier to click */
+    transition: all 0.3s ease-in-out; /* add a transition effect when the links are hovered over */
+    margin-top: 10px;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.dropdown-item:hover {
+    color: #fff; /* set the color of the link when it is hovered over or in focus */
+    background-color: #1f66cc; /* add a background color to make it stand out */
+    border-radius: 5px; /* add some border-radius to make it look more button-like */
+    text-decoration: none; /* remove the underline from the link */
+}
+
+.navbar-brand {
+    margin-right: 0.275rem;
+}
+
+h1 {
+    margin-top: 3rem;
+}
+
+.btn-duck-blue {
+    --bs-btn-color: #1f66cc;
+    --bs-btn-border-color: #1f66cc;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #1f66cc;
+    --bs-btn-hover-border-color: #1f66cc;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #1f66cc;
+    --bs-btn-active-border-color: #1f66cc;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #1f66cc;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #1f66cc;
+    --bs-gradient: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.navbar-nav {
+    margin-left: 0.25rem; /* add some space between logo and buttons */
+}
+
+#search-placeholder {
+    margin-left: auto;
+}
+
+/*.col-lg-6 {*/
+/*    flex: 0 0 auto;*/
+/*    width: 50%;*/
+/*  }*/
+
+
+.fixed-height-img {
+    height: 350px; /* change this value to adjust the height of the images */
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.card-body .card-text {
+    max-height: 56px;
+    overflow: hidden;
+    padding-bottom: 3rem;
+    padding-top: 0.5rem;
+}
+
+.small.text-muted {
+    margin-bottom: 0.5rem;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+
+.col-lg-7.feature {
+    width: 66%;
+}
+
+.col-lg-4.feature {
+    width: 32%;
+}
+
+.offset-lg-1.feature {
+    margin-left: 2%;
+}
+
+.form-control-sm {
+    /*font-size: .875rem;*/
+    /*line-height: 1.5;*/
+    border-radius: .375rem;
+    padding: .75rem 10px;
+}
+
+.btn {
+    --bs-btn-font-size: 0.875rem;
+    --bs-btn-padding-x: 0.625rem;
+
+}
+
+
+.page-section {
+    padding: 3rem 0;
+}
+
+.signup-section {
+    margin-bottom: 1.5rem;
+    padding: 10rem 0;
+    /*background: rgb(193,208,237);*/
+    background: linear-gradient(90deg, rgba(193, 208, 237, 0.3939776594231442) 24%, rgba(232, 232, 213, 0) 52%, rgba(240, 236, 176, 0.3939776594231442) 80%), url("../images/bg-signup.jpg") no-repeat scroll center;
+    background-size: cover;
+}
+
+.signup-section .form-signup input {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 1.25rem 2rem;
+    height: auto;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 80%;
+    letter-spacing: 0.15rem;
+    border: 0;
+}
+
+.col-auto #submitButton {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    height: 100%;
+}
+
+.btn.secondary {
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+.btn-secondary {
+    opacity: var(--bs-btn-disabled-opacity);
+}
+
+.card-body {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.row.mb-4 .col-2 {
+    width: 7%;
+}
+
+.row.mb-4 .col-10 {
+    width: 92%;
+}
+
+.row.mb-4 .col-10 .col-8 {
+    width: 90%;
+}
+
+.row.mb-4 .col-10 .col-4.text-end {
+    width: 10%;
+}
+
+#contactForm .mb-3 {
+    margin-bottom: 0rem !important;
+}
+
+.quote-section {
+    height: 25%;
+    flex: 0 1 auto;
+}
+
+.news-section {
+    height: 75%;
+    flex: 0 1 auto;
+}
+
+ul.list-group {
+    list-style-type: none;
+}
+
+div.about-contact {
+    height: 100%;
+    background-image: url("../images/quack-page.png");
+    background-size: cover;
+    /*background-position: center center;*/
+    /*background-repeat: no-repeat;*/
+}
+
+div.bg-custom-home {
+    height: calc(100% - 100vh);
+    background-image: url("../images/details-page.png");
+    background-size: contain;
+}
+
+div.bg-custom {
+    height: 100%;
+    background-image: url("../images/details-page.png");
+    background-size: contain;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 48px;
+    font-weight: 450;
+    color: black;
+    text-align: center;
+}
+
+.footer-home {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 48px;
+    font-weight: 450;
+    color: black;
+    text-align: center;
+}
+
+.visited {
+    display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+}
