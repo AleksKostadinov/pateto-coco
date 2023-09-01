@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from random import choice
 from .forms import CommentForm, SubscribersForm, MailMessageForm
 from newsapi import NewsApiClient
+from decouple import config
 
 
 def get_recent_posts():
@@ -37,10 +38,18 @@ def home(request):
     last_posts = get_recent_posts()
     posts = Post.objects.all()
     pinned = get_random_pinned_post()
-    quotes = requests.get('https://api.goprogram.ai/inspiration').json()
+
+    try:
+        response = requests.get('https://www.boredapi.com/api/activity/')
+        response.raise_for_status()  # Raise an exception for 4xx and 5xx status codes
+        quotes = response.json()
+    except requests.exceptions.RequestException as e:
+        # Handle the exception (e.g., log the error)
+        print(f"An error occurred: {e}")
+        quotes = []
 
     # Initialize the NewsApiClient with your API key
-    newsapi = NewsApiClient(api_key=os.environ.get('NEWS_API_KEY'))
+    newsapi = NewsApiClient(api_key=config('NEWS_API_KEY'))
 
     all_articles = newsapi.get_everything(q='destination OR adventure OR travel', language='en', sort_by='relevancy',
                                           page_size=3)
@@ -159,7 +168,7 @@ def contact(request):
                 email_subject,
                 email_message,
                 settings.CONTACT_EMAIL,
-                [os.environ.get('RECEPIENT_EMAIL')],
+                [config('RECEPIENT_EMAIL')],
             )
             return render(request, 'coco/coco-success.html')
     form = MailMessageForm()
