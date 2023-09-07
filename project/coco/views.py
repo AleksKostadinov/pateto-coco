@@ -116,7 +116,7 @@ def dest_favourites(request):
 def dest_where(request):
     places = PlacesVisited.objects.all()
 
-    m = folium.Map(location=[47.751569, 10.675063], zoom_start=5)
+    m = folium.Map(location=[49.44594350077738, 11.071861579494366], zoom_start=5)
 
     for place in places:
         coordinates = (place.latitude, place.longitude)
