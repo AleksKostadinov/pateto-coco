@@ -341,7 +341,7 @@ div.bg-custom {
 
 @media (max-width: 768px), (max-width: 1024px) {
     .nav-item {
-        background-color: rgba(221, 228, 251, 0.361);
+        background-color: rgba(255, 255, 255, 0.361);
     }
 }
 
