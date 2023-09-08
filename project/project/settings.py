@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'ckeditor',
+    'ckeditor_uploader',
 
     'coco',
 ]
@@ -155,6 +156,7 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+CKEDITOR_UPLOAD_PATH="uploads/"
 
 import cloudinary
 cloudinary.config(

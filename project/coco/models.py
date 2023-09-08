@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField 
 from cloudinary.models import CloudinaryField
 
 
@@ -20,7 +21,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = CloudinaryField('images')
     resume = models.TextField(max_length=500)
-    content = RichTextField(blank=True, null=True)
+    content = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.TextField(choices=STATUS, default='Draft')
