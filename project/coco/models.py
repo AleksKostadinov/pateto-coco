@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 
 class Post(models.Model):
@@ -17,7 +18,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images')
+    image = CloudinaryField('images')
     resume = models.TextField(max_length=500)
     content = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -83,7 +84,7 @@ class PlacesVisited(models.Model):
     title = models.CharField(max_length=100)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    image = models.ImageField(upload_to='images')
+    image = CloudinaryField('images')
     resume = models.CharField(max_length=100)
     tooltip = models.CharField(max_length=100)
     date = models.DateField(null=True, blank=True)
