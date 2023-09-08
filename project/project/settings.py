@@ -15,7 +15,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1']
 else:
-    ALLOWED_HOSTS = config('SERVERNAME')
+    ALLOWED_HOSTS = ['patetococo.pythonanywhere.com']
 
 # Application definition
 
