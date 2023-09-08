@@ -7,7 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('status', 'created_at', 'author')
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
-    raw_id_fields = ('author',)
+    # raw_id_fields = ('author',)
     # date_hierarchy = 'created_at'
     ordering = ['status', '-created_at']
 
